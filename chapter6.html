@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Abstract &#8212; Open Science</title>
+    <title>References: &#8212; Open Science</title>
   
   
   
@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chapter1.html">Abstract</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter2.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter3.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter4.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">Background:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">Methods:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">Results:</a></li>
 </ul>
 
     </div>
@@ -323,7 +323,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -334,11 +336,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Abstract</h1>
+    <h1>References:</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">References:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgments">Acknowledgments:</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -348,48 +360,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="abstract">
-<h1>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h1>
-<p>All-cause mortality in the US Adults, NHANES 1988-2018 surveys using a user-friendly Stata program</p>
-<p>Wafa Aldhaleei, MD, MSc, Johns Hopkins Bloomberg School of Public Health, Baltimore, MD, 21213
-Sungmin Park, MD, Johns Hopkins Bloomberg School of Public Health, Baltimore, MD, 21213</p>
-<p><strong>Background:</strong> The National Health and Nutrition Examination Survey (NHANES) is a program of studies designed to evaluate the health and nutritional status of adults in the United States. We are developing skills that allow us to access publicly available large databases that may be queried to answer fundamental questions about the publics health. These datasets might exist in formats unfamiliar to Stata users or in sizes that cripple ones workflow.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">qui do</span> https:<span class="o">//</span>raw<span class="m">.</span>githubusercontent<span class="m">.</span>com<span class="o">/</span>jhustata<span class="o">/</span>book<span class="o">/</span>main<span class="o">/</span>nhanes<span class="o">-</span>alpha<span class="m">.</span>ado      
-</pre></div>
-</div>
-<p><strong>Methods:</strong> For Stata/BE or IC users this current program outputs an NHANES dataset with 22 pre-specified variables. We curated a dataset with all the <a class="reference external" href="https://data.nber.org/mortality/">mortality records</a> in the United States from 1959-2017 and wrote a basic Stata script that output a <a class="reference external" href="https://jhustata.github.io/book/_downloads/9359d2ae4f8ad2efcfe2fd34e3547c35/mortality.png">two-way plot</a> showing annual trends in number of deaths during this period. We wrote a Stata program, <code class="docutils literal notranslate"><span class="pre">mortality</span></code>, that allows the user to define the time-period of interest, plus other parameters such as cause-of-death, and ultimately produce a similar two-way plot with the convenience of a Stata command.</p>
-<p><strong>Results:</strong> We can see from the graph that poor and bad nutrition groups are associated with a higher mortality rate over time.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> scheme s2color
-nhanes
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> unilogit
-<span class="k">		program</span> define unilogit
-<span class="k">		syntax varlist</span> [if], [outcome(string)] 
-<span class="k">		quietly foreach var</span> of<span class="k"> varlist</span> <span class="nv">`varlist&#39;</span> {
-<span class="k">			logistic</span> <span class="nv">`outcome&#39;</span> <span class="nv">`var&#39;</span> <span class="nv">`if&#39;</span>, nolog
-<span class="k">			lincom</span> <span class="nv">`var&#39;</span>
-<span class="k">			local</span> sig_p:<span class="k"> di</span> <span class="nx">%4.3f</span> <span class="nv">`r(p)&#39;</span>
-<span class="k">			if</span> <span class="nv">`sig_p&#39;</span> <span class="o">&lt;</span> <span class="m">0.05</span> {
-<span class="k">			noi di</span> <span class="s">&quot;</span><span class="nv">`var&#39;</span><span class="s">&quot;</span> _col(<span class="m">15</span>) <span class="s">&quot;</span><span class="nv">`sig_p&#39;</span><span class="s">&quot;</span>
-<span class="k">			noi di</span> <span class="s">&quot;Significantly associated with </span><span class="nv">`outcome&#39;</span><span class="s">:&quot;</span>
-<span class="k">            noi di</span> <span class="s">&quot;</span><span class="nv">`var&#39;</span><span class="s"> (p=</span><span class="nv">`sig_p&#39;</span><span class="s">)&quot;</span>
-<span class="k">			noi di</span> <span class="s">&quot;&quot;</span>
-			}
-		}
-<span class="k">	end</span>
-<span class="k">	noi</span> unilogit
-</pre></div>
-</div>
-<p><strong>Conclusions:</strong> Poor and bad nutrition is associated with higher mortality rates and are increasing with each decade.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> nh3andmort,<span class="k"> clear</span>
-<span class="k">di</span> <span class="s">&quot;obs: </span><span class="nv">`c(N)&#39;</span><span class="s"> &amp; vars: </span><span class="nv">`c(k)&#39;</span><span class="s">&quot;</span>      
-</pre></div>
-</div>
-<p><img alt="" src="_images/nh3andmort.png" /></p>
-<p><strong>Acknowledgments:</strong> We initially published our Stata output in a Jupiter-book hosted by Github. All the .html content of the book was produced in a Python environment; however, Stata .html output will gradually replace the Python-based output of the book as we truly become advanced Stata users!</p>
-<p>VS Code terminal is our IDE choice for committing and pushing our git content to our hub and have established a seamless process for updating our publication.</p>
-<p><strong>References:</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References:<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.cdc.gov/nchs/nhanes/about_nhanes.htm">https://www.cdc.gov/nchs/nhanes/about_nhanes.htm</a></p></li>
 <li><p><a class="reference external" href="https://jhustata.github.io/book/jjj.html">https://jhustata.github.io/book/jjj.html</a></p></li>
@@ -400,6 +372,11 @@ nhanes
 <li><p><a class="reference external" href="https://www.jhsph.edu/courses/course/37447/2022/340.700.71/advanced-stata-programming">https://www.jhsph.edu/courses/course/37447/2022/340.700.71/advanced-stata-programming</a></p></li>
 <li><p><a class="reference external" href="https://www.surgjournal.com/article/S0039-6060(18)30076-X/fulltext">Muzaale AD. Databases for surgical health services research: National Health and Nutrition Examination Survey. Surgery. 2019 May;165(5):873-875</a></p></li>
 </ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgments">
+<h1>Acknowledgments:<a class="headerlink" href="#acknowledgments" title="Permalink to this heading">#</a></h1>
+<p>We initially published our Stata output in a Jupiter-book hosted by Github. All the .html content of the book was produced in a Python environment; however, Stata .html output will gradually replace the Python-based output of the book as we truly become advanced Stata users!</p>
+<p>VS Code terminal is our IDE choice for committing and pushing our git content to our hub and have established a seamless process for updating our publication.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -442,6 +419,22 @@ nhanes
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">References:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgments">Acknowledgments:</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
