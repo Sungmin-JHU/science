@@ -4,9 +4,15 @@ This is my class700 advanced STATA project. It shows my structured abstract usin
 
 **Table of content:**
 Abstract
+
 Background
+
 Methods
+
 Results
+
 Conclusion
+
 References and acknowledgements
+
 STATA-friendly output
