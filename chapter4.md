@@ -1,6 +1,6 @@
-# Results
+# Results:
 
-**Results:** We can see from the graph that poor and bad nutrition groups are associated with a higher mortality rate over time.
+We can see from the graph that poor and bad nutrition groups are associated with a higher mortality rate over time.
 
 ```stata
 
